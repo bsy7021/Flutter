@@ -62,7 +62,11 @@ class _MyHomePageState extends State<MyHomePage> {
     var dir = await getApplicationDocumentsDirectory();
     // ~/test.txt 파일을 String 으로 변환하여 가져온다.
     var file = await File(dir.path + "/test.txt").readAsString();
-    file = file + '\n' + data;
+    if( file == '' ){
+      file = data;
+    } else {
+      file = file + '\n' + data;
+    }
     // 파일 저장
     File(dir.path + "/test.txt").writeAsStringSync(file);
   }
@@ -74,10 +78,11 @@ class _MyHomePageState extends State<MyHomePage> {
     // 최초 파일 생성
     var dir = await getApplicationDocumentsDirectory();
     var file;
-    bool fileExist = await File(dir.path + 'test.txt').exists();
+    bool fileExist = await File(dir.path + '/test.txt').exists();
 
     // 최초인 경우
     if( fileExist == false ) {
+      print("최초로 test.txt 파일 생성");
       // 파일 생성
       file = "";
       File(dir.path + "/test.txt").writeAsStringSync(file);
@@ -107,8 +112,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // List<String> → String
     var fileData = "";
-    for(var item in copyList){
-      fileData += item + "\n";
+    for(var i = 0; i < copyList.length; i++){
+      var item = copyList[i];
+      if( i < copyList.length - 1 ){
+        item += "\n";
+      }
+      fileData += item;
     }
 
     // 파일 저장 : String → txt
@@ -149,6 +158,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: ListView.builder(
                 itemBuilder: (context, index) {
                   return GestureDetector(
+                    onLongPress: () async {
+                      print("카드 길게 누름");
+                      bool check = await deleteMemo(index);
+                      if( check ) {
+                        setState(() {
+                          itemList.removeAt(index);
+                          }); 
+                      }
+                    },
                     child: Card(
                       child: Center(
                         child: Text(
