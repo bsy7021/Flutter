@@ -5,6 +5,10 @@ class UserScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    // ⭐ 데이터 전달받기
+    String? data = ModalRoute.of(context)!.settings.arguments as String?;
+
     return Scaffold(
       appBar: AppBar(title: const Text("마이 페이지"),),
       body: Center(child: Column(
@@ -12,6 +16,10 @@ class UserScreen extends StatelessWidget {
           Text(
             "마이 페이지",
             style: TextStyle(fontSize: 30.0),
+          ),
+          Text(
+            "data : $data",
+            style: TextStyle(fontSize: 20.0),
           ),
           SizedBox(height: 30.0),
           Text(

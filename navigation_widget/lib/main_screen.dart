@@ -24,15 +24,9 @@ class _MainScreenState extends State<MainScreen> {
     setState(() {
       _selectIndex = index;
       switch (_selectIndex) {
-        case 0:
-          _selectedScreen = HomeScreen();
-          break;
-        case 1:
-          _selectedScreen = UserScreen();
-          break;
-        case 2:
-          _selectedScreen = CommunityScreen();
-          break;
+        case 0: _selectedScreen = HomeScreen(data: 'home'); break;
+        case 1: _selectedScreen = UserScreen(); break;
+        case 2: _selectedScreen = CommunityScreen(); break;
       }
     });
   }
