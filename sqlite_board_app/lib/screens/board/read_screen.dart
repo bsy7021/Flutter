@@ -12,9 +12,9 @@ class ReadScreen extends StatefulWidget {
 class ReadScreenState extends State<ReadScreen> {
 
   // 🧊 state
-  String? id;
-  final boardService = BoardService();
-  late Future<Map<String, dynamic>?> _board;
+  String? id;                                 // 게시글 id
+  final boardService = BoardService();        // 게시글 서비스
+  late Future<Map<String, dynamic>?> _board;  // 게시글 데이터
 
   // 팝업메뉴 아이템 (수정하기, 삭제하기)
   final List<PopupMenuEntry<String>> _popupMenuItems = [
@@ -109,6 +109,7 @@ class ReadScreenState extends State<ReadScreen> {
         title: Text("게시글 조회"),
         actions: [
           PopupMenuButton(
+            // 팝업 메뉴 선택 시 이벤트
             onSelected: (String value) async {
               // 수정하기 클릭
               if( value == 'update' ) {
