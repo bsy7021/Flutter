@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:sqlite_board_app/models/board.dart';
-import 'package:http/http.dart' as http;
 
 class BoardService {
 
